@@ -21,7 +21,6 @@ Inventory.BackgroundWorker/bin/roslyn/VBCSCompiler.exe
 Inventory.BackgroundWorker/bin/roslyn/VBCSCompiler.exe.config
 Inventory.BackgroundWorker/bin/Serilog.Sinks.Debug.xml
 Inventory.BackgroundWorker/bin/Serilog.xml
-*.user
 *.cache
 Inventory.BackgroundWorker/obj/Debug/Inventory.BackgroundWorker.csproj.FileListAbsolute.txt
 Inventory.BackgroundWorker/obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
