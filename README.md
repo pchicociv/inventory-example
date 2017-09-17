@@ -10,7 +10,7 @@ There are four main actors in the system, all of which must run at the same time
 
 - Inventory.WebApi
 - Inventory.BackgroundWorker
-- Inventoyr.Consumer
+- Inventory.Consumer
 - RabbitMQ
 
 The Visual Studio solution is configured for "Multiple Startup Projects" and all applications should run simultaneously in debug mode.
@@ -152,7 +152,7 @@ Console application subscribed to all types of events to see what's happening
 
 ### RabbitMQ
 
-By default, the system uses a cloud based service at [CloudAMQP](https://www.cloudamqp.com/) so no further 
+By default, the system uses a cloud-based service at [CloudAMQP](https://www.cloudamqp.com/) so no further 
 steps need to be taken for the system to run.
 See instructions below to use a local RabbitMQ server with Docker.
 
@@ -165,8 +165,8 @@ Implementation of the tests can be found under Steps folder. [FluentAssertions](
 
 Once we have built the solution, the tests requested by the exercise can be found at Test Explorer window in Visual Studio.
 
-Unfortunately, given the high level of decoupling of the system, tests can not be run in parallel nor with  "Run All" option. 
-Instead they have to be run **one at a time** to give xUnit enough time to dispose the web server and the connections to RabbitMQ service.
+Unfortunately, given the high level of decoupling of the system, tests cannot be run in parallel nor with  "Run All" option. 
+Instead, they have to be run **one at a time** to give xUnit enough time to dispose of the web server and the connections to RabbitMQ service.
 
 - ### Requirement 1: 
   *Add an item to the inventory*
@@ -194,7 +194,7 @@ Instead they have to be run **one at a time** to give xUnit enough time to dispo
     - The OWIN web server is instantiated
     - A POST request is sent to the server with the item (so it exists later)
     - A DELETE request is sent to take the item out by label
-    - A connection to RabbitMQ message broker with a subscription to the ItemTaken event is stablished
+    - A connection to RabbitMQ message broker with a subscription to the ItemTaken event is established
     - A notification should be received of type ItemTaken containing information about the item deleted. Label should match the label of the item taken out previously
 
 - ### Requirement 4:
@@ -204,7 +204,7 @@ Instead they have to be run **one at a time** to give xUnit enough time to dispo
     - The OWIN web server is instantiated
     - A POST request is sent to the server with the item (so it exists later)
     - A DayFinished event is raised
-    - A connection to RabbitMQ message broker with a subscription to the ItemExpired event is stablished
+    - A connection to RabbitMQ message broker with a subscription to the ItemExpired event is established
     - A notification should be received of type ItemExpired containing information about the expired item. Label should match the label of the item added previously
 
 
@@ -220,8 +220,8 @@ We may include new useful information as the system evolves, such as user identi
 
 ### Persistent repositories
 
-Thanks to IoC (with [StructureMap](http://structuremap.github.io/)), it is quite simple to susbstitute the actual repositories being injected
-in the controllers or in the test methods. If we want to implement a persisten repository, only IoC configuration has to be modified, changing the association
+Thanks to IoC (with [StructureMap](http://structuremap.github.io/)), it is quite simple to substitute the actual repositories being injected
+in the controllers or in the test methods. If we want to implement a persistent repository, only IoC configuration has to be modified, changing the association
 between Interfaces and Concrete Classes
 
 ### Browser cache
@@ -235,29 +235,29 @@ To prevent data from being cached by the browser we instruct it not to keep any 
 ### Security
 
 Security has been simplified and there isn't any implementation for user or client registering, token generation,
-or any cryptograhpic function for user validation.
+or any cryptographic function for user validation.
 
 The system does implement the logic for basic user authentication and token validation, with predefined and constant values for keys.
 
-OAuth2 and OpenId Connect usage could be easily added with a third party authorizarion service such as [IdentityServer](https://github.com/IdentityServer/IdentityServer3)
+OAuth2 and OpenId Connect usage could be easily added to with a third party authorization service such as [IdentityServer](https://github.com/IdentityServer/IdentityServer3)
 
 ### Serilog
 
-Logging in a production environment requires a lot of decissions. Some logs may be just written
+Logging in a production environment requires a lot of decisions. Some logs may be just written
 to a text file while others may require to be sent to an alert system, or be processed by a 
 big data engine.
 
-For this demo, logs are written to debug output window. In a production environment we may go 
-for an structured application log engine like [Seq](https://getseq.net/) instead. 
-Probably cloud based.
+For this demo, logs are written to debug output window. In a production environment, we may go 
+for a structured application log engine like [Seq](https://getseq.net/) instead. 
+Probably cloud-based.
 
-Also we may implement a wrapper around Serilog for sharing purposes as well as hiding Serilog 
+Also, we may implement a wrapper around Serilog for sharing purposes as well as hiding Serilog 
 behind an interface to ease future changes.
 
 ### SpecFlow
 
-Tests in Inventory.Specs must run secuentially in order to avoid problems with the items in the inventory for each test.
-We can configure this behaviour in AssemblyInfo.cs:
+Tests in Inventory.Specs must run sequentially in order to avoid problems with the items in the inventory for each test.
+We can configure this behavior in AssemblyInfo.cs:
 
 ```c#
 [assembly:CollectionBehavior(DisableTestParallelization = true)]
@@ -272,18 +272,18 @@ a RabbitMQ image.
 docker run -d --hostname my-rabbit --name inventory-rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management
 ```
 Then in web.config, appSettings, change UseLocalRabbit to true.
-Depending on the OS connection to the guest system may vary. In Linux we can use localhost directly, but in Windows
+Depending on the OS connection to the guest system may vary. In Linux, we can use localhost directly, but in Windows,
 a virtual adapter is created and we need to use its IP.
 The IP used to connect to RabbitMQ service can be also configured in web.config->appSettings->LocalRabbitIP
 
-### Xml Documentation
+### XML Documentation
 
 There are several simple comments in the code but every public method and property should be properly decorated
-with xml comments to document functionality.
+with XML comments to document functionality.
 
 ### API Versioning
 
-At some point the API will evolve and we will have to support more than one version at the same time.
+At some point, the API will evolve and we will have to support more than one version at the same time.
 This can be accomplished with various techniques, such as Accept Headers, Media Types or even directly in the Url.
 
 
