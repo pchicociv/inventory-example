@@ -40,8 +40,8 @@ The api has a few requirements:
 
 ```json
 {
-	"Label" : "Etiqueta2",
-	"ItemType": "Type1",
+	"Label" : "any_label",
+	"ItemType": "any_type",
 	"ExpirationDate" : "01/01/2020"
 }
 ```
@@ -226,7 +226,7 @@ between Interfaces and Concrete Classes
 
 ### Browser cache
 
-To avoid data to be cached by the browser we instruct it not to keep any responses with HTTP headers in the responses
+To prevent data from being cached by the browser we instruct it not to keep any responses with HTTP headers in the responses
 
 ```
 [{"key":"cache-control","value":"no-store, must-revalidate, no-cache, max-age=0"}]
