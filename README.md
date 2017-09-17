@@ -36,7 +36,7 @@ The api has a few requirements:
    
       https://localhost:44301/api/inventory?apikey=88DA3BBAC33F4C35A7B6453185F38BB2&token=F46B9A9B642943C182E319880F85A554
 
-- it excepts Item objects in json format
+- it accepts Item objects in json format
 
 ```json
 {
