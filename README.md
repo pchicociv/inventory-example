@@ -222,7 +222,7 @@ We may include new useful information as the system evolves, such as user identi
 
 Thanks to IoC (with [StructureMap](http://structuremap.github.io/)), it is quite simple to substitute the actual repositories being injected
 in the controllers or in the test methods. If we want to implement a persistent repository, only IoC configuration has to be modified, changing the association
-between Interfaces and Concrete Classes
+between Interfaces and specific classes
 
 ### Browser cache
 
