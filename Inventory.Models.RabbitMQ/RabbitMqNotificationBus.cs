@@ -105,8 +105,10 @@ namespace Inventory.Models.RabbitMQ
         {
             string queueName = GetQueueName<T>();
 
-            _connection = _factory.CreateConnection();
-            _channel = _connection.CreateModel();
+            if (_connection == null)
+                _connection = _factory.CreateConnection();
+            if (_channel == null)
+                _channel = _connection.CreateModel();
 
             _channel.QueueDeclare(queueName, true, false, false, null);
             var consumer = new EventingBasicConsumer(_channel);
